@@ -1,14 +1,13 @@
 name: Sync Garmin CN to Garmin Global
 
-#on:
-#  workflow_dispatch:
-#  schedule:
-#    #  每6小时检查一次
-#    - cron: "0 23 * * *"
-#    - cron: "0 9 * * *"
- # push:
- #   branches:
- #     - main
+on:
+  workflow_dispatch:
+  schedule:
+    #  每6小时检查一次
+    - cron: "0 */24 * * *"
+  push:
+    branches:
+      - main
 
 env:
   # please change to your own config.
@@ -28,6 +27,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Sync Garmin CN to Garmin Global
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -37,6 +38,6 @@ jobs:
       - run: yarn
       - run: yarn sync_cn
         timeout-minutes: 5
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Save Garmin Session

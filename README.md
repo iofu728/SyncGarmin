@@ -23,7 +23,9 @@
 因为项目之前在Github上占用过多资源被封禁，现在已经调整了执行的频率，熟悉代码的话，将代码下载下来，上传到github，通过 github Actions执行
 具体参考下方文档或参考视频教程: https://www.bilibili.com/video/BV1v94y1Q7oR/?spm_id_from=333.999.0.0
 
+## 使用前账号准备与配置
 
+【重要重要重要！！！】请先参照 [账号准备](https://dailysync.vyzt.dev/docs/%E8%B4%A6%E5%8F%B7%E5%87%86%E5%A4%87) 进行账号配置，再来使用此工具
 
 ## 本地运行方案
 首先确保运行此脚本的机器能够访问国际互联网, 如国外VPS、家庭全局科学的环境等， 否则无法正常登录佳明国际区
@@ -164,13 +166,13 @@ yarn migrate_garmin_global_to_cn
 ```cron
 PATH=$PATH:/usr/local/bin:/usr/bin
 SHELL=/bin/bash
-* */3 * * * cd /root/code/dailysync/ && yarn --cwd /root/code/dailysync/ sync_global >> /var/log/dailysync.log 2>&1
+0 */3 * * * cd /root/code/dailysync/ && yarn --cwd /root/code/dailysync/ sync_global >> /var/log/dailysync.log 2>&1
 ```
 ### 每3小时检查并同步中国区到国际区【可选】,注意PATH和SHELL两行也要写上
 ```cron
 PATH=$PATH:/usr/local/bin:/usr/bin
 SHELL=/bin/bash
-* */3 * * * cd /root/code/dailysync/ && yarn --cwd /root/code/dailysync/ sync_cn >> /var/log/dailysync.log 2>&1
+0 */3 * * * cd /root/code/dailysync/ && yarn --cwd /root/code/dailysync/ sync_cn >> /var/log/dailysync.log 2>&1
 ```
 其中 `/root/code/dailysync/`为脚本在机器上的目录地址，更换为您机器上的目录即可
 
